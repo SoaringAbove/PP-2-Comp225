@@ -8,6 +8,7 @@ public class ArrayQ<E> implements QueueInterface<E>{
     protected int rear = -1;
     protected int front = 0;
 
+
     private static final int DEFAULT_LENGTH = 6;
 
     @SuppressWarnings("unchecked")
