@@ -1,6 +1,7 @@
 package adts;
-import exceptions.QueueFullException;
+import exceptions.*;
 import interfaces.QueueInterface;
+import java.lang.StringBuilder;
 
 public class ArrayQ<E> implements QueueInterface<E>{
     protected E[] queue;
@@ -29,17 +30,24 @@ public class ArrayQ<E> implements QueueInterface<E>{
 
     }
     
-
     @Override
     public E dequeue() {
-        E temp = queue[front];
-        queue[front] = null;
-        rear--;
-
-        for(int i = queue.length - 1; i >= 0; i--){
-            queue[i+1] = queue[i];
+        try{
+            if(isEmpty()){
+                throw new exceptions.QueueEmptyException("Queue is empty");
+            }
+       
+        } catch (exceptions.QueueEmptyException e){
+            e.printStackTrace();
         }
-        return temp;
+          E temp = queue[front];
+            queue[front] = null;
+            rear--;
+
+            for(int i = queue.length - 1; i >= 0; i--){
+                queue[i+1] = queue[i];
+            }
+            return temp;
     }
 
     @Override
@@ -54,7 +62,20 @@ public class ArrayQ<E> implements QueueInterface<E>{
 
     @Override
     public String toString(){
-        return "";
+        if (isEmpty()) return "[]";
+        StringBuilder stringBuild = new StringBuilder();
+        stringBuild.append("[");
+        
+        for(int i = 0; i < queue.length; ++i){
+            if(queue[i] != null){
+                stringBuild.append(queue[i]);
+                if(i < rear){
+                    stringBuild.append(", ");
+                }
+            }
+        }
+        stringBuild.append("]");
+        return stringBuild.toString();
     }
 }
 
