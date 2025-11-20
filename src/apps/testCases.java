@@ -1,7 +1,4 @@
 package apps;
-
-import java.lang.reflect.Array;
-
 /* 
  
  You must write 12 test cases:
